@@ -1,30 +1,36 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted } from 'vue'
+import Home from './views/Home.vue'
+
+// All'avvio: forziamo la dark mode su <html>
+onMounted(() => {
+  document.documentElement.classList.add('dark')
+})
 </script>
 
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-6 py-5 bg-slate-900 dark:bg-slate-800 border-b border-slate-800 shadow-xl transition-all duration-300">
+      <span class="text-2xl font-extrabold text-blue-400 dark:text-blue-200 tracking-tight drop-shadow-glow animate-fade-in">
+        Fullstack Stories
+      </span>
+    </nav>
+    <main class="fade-in">
+      <Home />
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px #60a5fa90);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(18px);}
+  to { opacity: 1; transform: translateY(0);}
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.fade-in {
+  animation: fade-in 0.6s cubic-bezier(.6,.1,.62,1.0) both;
 }
 </style>
