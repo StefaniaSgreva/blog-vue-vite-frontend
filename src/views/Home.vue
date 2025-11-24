@@ -56,15 +56,26 @@
           </div>
         </article>
       </div>
+
+      <!-- Paginazione -->
+       <Pagination
+          :currentPage="currentPage"
+          :totalPages="totalPages"
+          :onPageChange="fetchPosts"
+        />
+        
     </section>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import Pagination from '../components/pagination.vue'
 
 const posts = ref([])
-const loading = ref(true)
+const loading = ref(false)
+const currentPage = ref(1)
+const totalPages = ref(1)
 
 function formatDate(dateStr) {
   const dt = new Date(dateStr)
@@ -74,17 +85,22 @@ function authorInitials(name = "") {
   return name.split(' ').map(part => part[0]).join('').toUpperCase()
 }
 
-onMounted(async () => {
+async function fetchPosts(page = 1) {
+  loading.value = true
   try {
-    const res = await fetch('http://localhost:3000/posts?published=true&page=1&limit=10')
+    const res = await fetch(`http://localhost:3000/posts?published=true&page=${page}&limit=10`)
     const result = await res.json()
     posts.value = result.data
+    currentPage.value = result.page
+    totalPages.value = result.totalPages
   } catch (e) {
     console.error('Errore nel caricamento post:', e)
   } finally {
     loading.value = false
   }
-})
+}
+
+onMounted(() => fetchPosts())
 </script>
 
 <style>
