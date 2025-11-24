@@ -9,6 +9,11 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- Skip-link: sempre il primo elemento! - accessibility -->
+  <a href="#titolo-home" class="skip-link absolute left-2 top-2 bg-blue-700 text-white px-3 py-2 rounded focus:outline-none focus:ring transition shadow z-50">
+    Salta al contenuto
+  </a>
+
   <div>
     <!-- Navbar -->
     <nav class="flex items-center justify-between px-6 py-5 bg-slate-800 border-b border-slate-800 shadow-xl transition-all duration-300">
