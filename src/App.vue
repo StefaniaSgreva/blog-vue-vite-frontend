@@ -11,8 +11,8 @@ onMounted(() => {
 <template>
   <div>
     <!-- Navbar -->
-    <nav class="flex items-center justify-between px-6 py-5 bg-slate-900 dark:bg-slate-800 border-b border-slate-800 shadow-xl transition-all duration-300">
-      <span class="text-2xl font-extrabold text-blue-400 dark:text-blue-200 tracking-tight drop-shadow-glow animate-fade-in">
+    <nav class="flex items-center justify-between px-6 py-5 bg-slate-800 border-b border-slate-800 shadow-xl transition-all duration-300">
+      <span class="text-2xl font-extrabold text-blue-200 tracking-tight drop-shadow-glow animate-fade-in">
         Fullstack Stories
       </span>
     </nav>
