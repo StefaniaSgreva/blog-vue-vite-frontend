@@ -15,6 +15,20 @@
       </svg>
     </router-link>
 
+    <!-- Pulsante Elimina -->
+    <button
+      @click.stop.prevent="deletePost(post.slug)"
+      class="absolute top-3 right-14 p-2 z-10 bg-red-700/90 rounded-full hover:bg-red-900 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+      :aria-label="`Elimina articolo: ${post.title}`"
+      tabindex="0"
+      style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+    >
+      <!-- SVG icona cestino -->
+       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-red-300" aria-hidden="true" focusable="false">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"/>
+      </svg>
+    </button>
+
     <!-- CARD -->
     <router-link
       :to="`/posts/${post.slug}`"
@@ -80,6 +94,20 @@ function formatDate(dateStr) {
   const dt = new Date(dateStr)
   return dt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })
 }
+
+async function deletePost(slug) {
+  if (!confirm(`Sei sicuro di voler eliminare l'articolo "${slug}"?`)) return;
+  try {
+    const res = await fetch(`${apiBaseUrl}/posts/${slug}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Errore durante la cancellazione');
+    
+    alert('Articolo eliminato con successo');
+    // Ricarica la pagina per aggiornare la lista post
+    window.location.reload();
+  } catch (err) {
+    alert(`Errore: ${err.message}`);
+  }
+}
 </script>
 
 <style scoped>
@@ -90,4 +118,5 @@ function formatDate(dateStr) {
   overflow: hidden;
   min-height: calc(1.5em * 3); /* assicura spazio a 3 righe */
 }
+
 </style>
