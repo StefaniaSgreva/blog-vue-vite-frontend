@@ -6,21 +6,8 @@
           {{ article.title }}
         </h1>
         <div class="flex flex-wrap gap-2 items-center text-xs text-gray-400">
-          <span
-            v-if="article.category"
-            class="inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide shadow-sm"
-            :aria-label="`Categoria: ${article.category.name}`"
-          >{{ article.category.name }}</span>
-          <span
-            v-if="article.author"
-            class="ml-2 flex items-center"
-            :aria-label="`Autore: ${article.author.name}`"
-          >
-            <span class="inline-flex items-center justify-center bg-blue-950 h-7 w-7 rounded-full mr-1 text-blue-300 font-bold uppercase border border-blue-600">
-              {{ authorInitials(article.author.name) }}
-            </span>
-            <span>{{ article.author.name }}</span>
-          </span>
+          <CategoryBadge v-if="article.category" :category="article.category" />
+          <AuthorBadge v-if="article.author" :author="article.author" />
           <time class="ml-3" :dateTime="article.createdAt">
             {{ formatDate(article.createdAt) }}
           </time>
@@ -35,53 +22,40 @@
       <article class="prose prose-invert max-w-none text-gray-100">
         <p>{{ article.content }}</p>
       </article>
-      <div class="mt-6 flex flex-wrap gap-2" aria-label="Tag articolo">
-        <span
-          v-for="tag in article.tags"
-          :key="tag.id"
-          class="px-2 py-1 bg-blue-950 text-blue-400 text-xs rounded-full border border-blue-600 font-medium"
-          :aria-label="`Tag: ${tag.name}`"
-        >#{{ tag.name }}</span>
-      </div>
+      <TagList :tags="article.tags" />
       <router-link
         class="mt-10 inline-block text-blue-400 underline hover:text-blue-200 font-semibold transition"
         to="/"
       >← Torna agli articoli</router-link>
     </section>
-    <section v-else class="flex items-center justify-center min-h-[60vh]">
-      <div>
-        <h2 class="text-xl text-gray-200 mb-4">Articolo non trovato</h2>
-        <router-link class="text-blue-400 underline hover:text-blue-200" to="/">Torna alla Home</router-link>
-      </div>
-    </section>
+    <ArticleNotFound v-else />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import CategoryBadge from '../components/CategoryBadge.vue'
+import AuthorBadge from '../components/AuthorBadge.vue'
+import TagList from '../components/TagList.vue'
+import ArticleNotFound from '../components/ArticleNotFound.vue'
 
 const route = useRoute()
 const article = ref(null)
-
-async function fetchArticle(slug) {
-  try {
-    const res = await fetch(`http://localhost:3000/posts/${slug}`)
-    const result = await res.json()
-    console.log("API result:", result) 
-    article.value = result.data || result // alcune API inviano "data", altre il post direttamente
-  } catch (e) {
-    article.value = null
-  }
-}
-
 
 function formatDate(dateStr) {
   const dt = new Date(dateStr)
   return dt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })
 }
-function authorInitials(name = "") {
-  return name.split(' ').map(part => part[0]).join('').toUpperCase()
+
+async function fetchArticle(slug) {
+  try {
+    const res = await fetch(`http://localhost:3000/posts/${slug}`)
+    const result = await res.json()
+    article.value = result.data || result
+  } catch (e) {
+    article.value = null
+  }
 }
 
 onMounted(() => fetchArticle(route.params.slug))

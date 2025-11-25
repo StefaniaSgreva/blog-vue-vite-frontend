@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 // import Home from './views/Home.vue'
+import Footer from './components/Footer.vue'
 
 // All'avvio: forziamo la dark mode su <html>
 onMounted(() => {
@@ -25,6 +26,8 @@ onMounted(() => {
       <!-- <Home /> -->
        <router-view />
     </main>
+
+    <Footer />
   </div>
 </template>
 
