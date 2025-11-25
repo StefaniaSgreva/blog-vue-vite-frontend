@@ -10,7 +10,7 @@
 
 [![Frontend – Vue3/Vite/Tailwind](https://img.shields.io/badge/frontend-vue3%2Fvite-blue?style=flat-square)]()
 [![Backend – Express/Prisma/MySQL](https://img.shields.io/badge/backend-express%2Fprisma%2Fmysql-green?style=flat-square)](https://github.com/StefaniaSgreva/blog-express-prisma-backend)
-
+![No License – Private Portfolio Project](https://img.shields.io/badge/license-unlicensed-blue?style=flat-square)
 ...
 
 ## Getting Started
@@ -28,11 +28,20 @@
     npm install
     ```
 
-3.  **Configure API endpoint**
-    Edit `/src/config.js` or use `.env` (if present):
+3.  **Configure environment variables**
+
+    Copy `.env.example` to `.env`:
 
     ```
-    VITE_API_URL=http://localhost:3000
+      cp .env.example .env
+    ```
+
+    Edit `.env` and set your backend API endpoint:
+
+    ```
+      VITE_API_URL=http://localhost:3000
+      # Or your production URL
+      # VITE_API_URL=https://api.yourdomain.com
     ```
 
 4.  **Run the development server**

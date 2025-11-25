@@ -18,10 +18,25 @@ onMounted(() => {
   <div>
     <!-- Navbar -->
     <nav class="flex items-center justify-between px-6 py-5 bg-slate-800 border-b border-slate-800 shadow-xl transition-all duration-300">
-      <span class="text-2xl font-extrabold text-blue-200 tracking-tight drop-shadow-glow animate-fade-in">
+      <!-- Link testuale con animazione -->
+      <router-link
+        to="/"
+        class="animated-link text-2xl font-extrabold text-blue-200 tracking-tight drop-shadow-glow animate-fade-in transition-colors"
+      >
         Fullstack Stories
-      </span>
+      </router-link>
+
+      <!-- Bottone azione stile "Nuovo Articolo" -->
+      <router-link
+        to="/posts/new"
+        class="btn-nuovo-articolo ml-4 font-bold flex items-center gap-2"
+        aria-label="Crea un nuovo articolo"
+      >
+        <span class="text-xl leading-none">+</span>
+        <span class="tracking-wide">Nuovo Articolo</span>
+      </router-link>
     </nav>
+
     <main class="fade-in">
       <!-- <Home /> -->
        <router-view />

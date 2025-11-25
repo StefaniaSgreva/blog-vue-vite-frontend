@@ -7,12 +7,12 @@
     :aria-labelledby="`post-title-${post.id}`"
   >
     <article>
-      <img
-        :src="post.image || '/img/placeholder.webp'"
-        :alt="post.image ? `Copertina dell'articolo: ${post.title}` : 'Immagine di copertina generica articolo'"
-        class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-200"
-        loading="lazy"
-      />
+    <img
+      :src="post.image ? (apiBaseUrl + post.image) : '/img/placeholder.webp'" 
+      :alt="post.image ? `Copertina dell'articolo: ${post.title}` : 'Immagine di copertina generica articolo'"
+      class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-200"
+      loading="lazy"
+    />
       <div class="p-6 flex flex-col flex-1">
         <div class="flex flex-wrap items-center gap-2 mb-3">
           <span
@@ -52,6 +52,8 @@
 </template>
 
 <script setup>
+const apiBaseUrl = import.meta.env.VITE_API_URL
+
 defineProps({ post: Object })
 function authorInitials(name = "") {
   return name.split(' ').map(part => part[0]).join('').toUpperCase()

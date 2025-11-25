@@ -26,3 +26,6 @@ dist-ssr
 # Ref
 Home_01.vue
 Home_02.vue
+
+#.env
+.env
