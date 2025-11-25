@@ -14,7 +14,7 @@
         </div>
       </header>
       <img
-        :src="article.image || '/img/placeholder.webp'"
+        :src="article.image ? (apiBaseUrl + article.image) : '/img/placeholder.webp'" 
         :alt="article.image ? `Copertina dell'articolo: ${article.title}` : 'Immagine di copertina generica articolo'"
         class="w-full rounded-xl shadow mb-8"
         loading="lazy"
@@ -42,6 +42,7 @@ import ArticleNotFound from '../components/ArticleNotFound.vue'
 
 const route = useRoute()
 const article = ref(null)
+const apiBaseUrl = import.meta.env.VITE_API_URL
 
 function formatDate(dateStr) {
   const dt = new Date(dateStr)
