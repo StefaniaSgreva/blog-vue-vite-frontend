@@ -23,20 +23,22 @@
         aria-atomic="true"
         aria-relevant="additions removals"
       >
-        <article
-          v-for="post in posts"
-          :key="post.id"
-          class="bg-slate-900 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-200 group flex flex-col overflow-hidden border border-slate-700"
-          tabindex="0"
-          :aria-labelledby="`post-title-${post.id}`"
-        >
-          <img
-            v-if="post.image"
-            :src="post.image"
-            :alt="`Copertina dell'articolo: ${post.title}`"
-            class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-200"
-            loading="lazy"
-          />
+      <router-link
+        v-for="post in posts"
+        :key="post.id"
+        :to="`/posts/${post.slug}`"
+        class="bg-slate-900 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-200 group flex flex-col overflow-hidden border border-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        tabindex="0"
+        style="text-decoration: none;"
+        :aria-labelledby="`post-title-${post.id}`"
+      >
+        <article>
+        <img
+          :src="post.image || '/img/placeholder.webp'"
+          :alt="post.image ? `Copertina dell'articolo: ${post.title}` : 'Immagine di copertina generica articolo'"
+          class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-200"
+          loading="lazy"
+        />
           <div class="p-6 flex flex-col flex-1">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span
@@ -71,6 +73,7 @@
             </div>
           </div>
         </article>
+      </router-link>
       </div>
       <Pagination
         :currentPage="currentPage"
@@ -114,6 +117,11 @@ async function fetchPosts(page = 1) {
 }
 
 onMounted(() => fetchPosts())
+// onMounted(async () => {
+//   await fetchPosts();
+//   console.log(posts.value[0]); // <-- qui vedi tutte le proprietà di un post
+// });
+
 </script>
 
 <style>

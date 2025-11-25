@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
-import Home from './views/Home.vue'
+// import Home from './views/Home.vue'
 
 // All'avvio: forziamo la dark mode su <html>
 onMounted(() => {
@@ -22,7 +22,8 @@ onMounted(() => {
       </span>
     </nav>
     <main class="fade-in">
-      <Home />
+      <!-- <Home /> -->
+       <router-view />
     </main>
   </div>
 </template>
