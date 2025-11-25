@@ -57,23 +57,25 @@
 
     ## Project Structure Preview
 
+    ```text
     src/
-    components/
-    ArticleCard.vue
-    ArticleList.vue
-    AuthorBadge.vue
-    CategoryBadge.vue
-    TagList.vue
-    LoaderSpinner.vue
-    Pagination.vue
-    ArticleNotFound.vue
-    Footer.vue
-    views/
-    Home.vue
-    ArticleShow.vue
-    router/
-    index.js
-    App.vue
+      components/
+        ArticleCard.vue
+        ArticleList.vue
+        AuthorBadge.vue
+        CategoryBadge.vue
+        TagList.vue
+        LoaderSpinner.vue
+        Pagination.vue
+        ArticleNotFound.vue
+        Footer.vue
+      views/
+        Home.vue
+        ArticleShow.vue
+      router/
+        index.js
+      App.vue
+    ```
 
     ## Main Components:
 
@@ -94,7 +96,7 @@
     ## Example .env
 
     ```
-     VITE_API_URL=http://localhost:3000
+    VITE_API_URL=http://localhost:3000
     ```
 
     ## Usage Modes
