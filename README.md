@@ -35,7 +35,7 @@
     VITE_API_URL=http://localhost:3000
     ```
 
-    4. **Run the development server**
+4.  **Run the development server**
 
     ```
      npm run dev
@@ -57,11 +57,37 @@
 
     ## Project Structure Preview
 
-    <pre> ``` src/ components/ ArticleCard.vue ArticleList.vue AuthorBadge.vue CategoryBadge.vue TagList.vue LoaderSpinner.vue Pagination.vue ArticleNotFound.vue Footer.vue views/ Home.vue ArticleShow.vue router/ index.js App.vue ``` </pre>
+    src/
+    components/
+    ArticleCard.vue
+    ArticleList.vue
+    AuthorBadge.vue
+    CategoryBadge.vue
+    TagList.vue
+    LoaderSpinner.vue
+    Pagination.vue
+    ArticleNotFound.vue
+    Footer.vue
+    views/
+    Home.vue
+    ArticleShow.vue
+    router/
+    index.js
+    App.vue
 
     ## Main Components:
 
-    <pre> | Component | Description | | ----------------- | -------------------------------- | | ArticleCard | Blog post preview card | | ArticleList | Grid/list view for posts | | AuthorBadge | Author display with initials | | CategoryBadge | Category label | | TagList | Badge set for article tags | | LoaderSpinner | Accessible loading indicator | | Pagination | Page navigation and controls | | ArticleNotFound | Not found / error state | | Footer | Site-wide footer | </pre>
+    | Component       | Description                  |
+    | --------------- | ---------------------------- |
+    | ArticleCard     | Blog post preview card       |
+    | ArticleList     | Grid/list view for posts     |
+    | AuthorBadge     | Author display with initials |
+    | CategoryBadge   | Category label               |
+    | TagList         | Badge set for article tags   |
+    | LoaderSpinner   | Accessible loading indicator |
+    | Pagination      | Page navigation and controls |
+    | ArticleNotFound | Not found / error state      |
+    | Footer          | Site-wide footer             |
 
     Each component is documented and designed for reuse.
 
@@ -77,10 +103,11 @@
       - Open CORS policy on backend for testing
       - Demo/test users can access all features
     - Production
+
       - Intended to work with the secure version of [blog-express-prisma-backend]
       - Backend enforces authentication, authorization, and security
 
-    <!-- ## Screenshots -->
+      <!-- ## Screenshots -->
 
     ## License
 
