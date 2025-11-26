@@ -1,12 +1,11 @@
 <template>
-  <div class="relative">
+  <div class="relative" role="listitem">
     <!-- ICONA MODIFICA -->
     <router-link
       :to="`/posts/${post.slug}/edit`"
       class="absolute top-3 right-3 p-2 z-10 bg-slate-800/90 rounded-full hover:bg-blue-600 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"      
       :aria-label="`Modifica articolo: ${post.title}`"
       @click.stop
-      tabindex="0"
       style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
     >
       <!-- ICONA MODIFICA - SVG Personalizzata -->
@@ -17,10 +16,9 @@
 
     <!-- Pulsante Elimina -->
     <button
-      @click.stop.prevent="deletePost(post.slug)"
+       @click.stop="$emit('ask-delete', post.slug)"
       class="absolute top-3 right-14 p-2 z-10 bg-red-700/90 rounded-full hover:bg-red-900 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
       :aria-label="`Elimina articolo: ${post.title}`"
-      tabindex="0"
       style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
     >
       <!-- SVG icona cestino -->
@@ -33,7 +31,6 @@
     <router-link
       :to="`/posts/${post.slug}`"
       class="bg-slate-900 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-200 group flex flex-col overflow-hidden border border-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-      tabindex="0"
       style="text-decoration: none;"
       :aria-labelledby="`post-title-${post.id}`"
     >
@@ -61,7 +58,6 @@
           <h2
             class="text-2xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors duration-150"
             :id="`post-title-${post.id}`"
-            tabindex="0"
           >
             {{ post.title }}
           </h2>
@@ -93,20 +89,6 @@ function authorInitials(name = "") {
 function formatDate(dateStr) {
   const dt = new Date(dateStr)
   return dt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })
-}
-
-async function deletePost(slug) {
-  if (!confirm(`Sei sicuro di voler eliminare l'articolo "${slug}"?`)) return;
-  try {
-    const res = await fetch(`${apiBaseUrl}/posts/${slug}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Errore durante la cancellazione');
-    
-    alert('Articolo eliminato con successo');
-    // Ricarica la pagina per aggiornare la lista post
-    window.location.reload();
-  } catch (err) {
-    alert(`Errore: ${err.message}`);
-  }
 }
 </script>
 
