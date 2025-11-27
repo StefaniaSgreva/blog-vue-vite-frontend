@@ -83,9 +83,11 @@
 const apiBaseUrl = import.meta.env.VITE_API_URL
 
 defineProps({ post: Object })
-function authorInitials(name = "") {
+
+function authorInitials(name = '') {
   return name.split(' ').map(part => part[0]).join('').toUpperCase()
 }
+
 function formatDate(dateStr) {
   const dt = new Date(dateStr)
   return dt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })

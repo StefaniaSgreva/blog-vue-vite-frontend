@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { watch, onUnmounted, ref, onBeforeUnmount } from 'vue'
+import {  ref, watch, onMounted, onUnmounted } from 'vue'
 
 // Props per apertura, titolo, messaggio, errore, e stato loading (opzionale per UX)
 const props = defineProps({
@@ -87,11 +87,13 @@ watch(() => props.open, (open) => {
 function onKeydown(e) {
   if (props.open && e.key === 'Escape') emit('cancel')
 }
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
-// Sblocca lo scroll sempre se il componente viene smontato (precauzione)
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+})
+
 onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
   document.body.style.overflow = ''
 })
 </script>
